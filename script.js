@@ -13,40 +13,40 @@ function show(text, options) {
 }
 
 function start() {
-    show("You wake up in a forest.", [
-        { text: "Walk forward", next: path1 },
-        { text: "Look around", next: path2 }
+    show("You wake up in a forest, vision blurry, smoke all around you. People are running and screaming.", [
+        { text: "Follow the crowd", next: path1 },
+        { text: "Run into the forest", next: path2 }
     ])
 }
 
 function path1() {
-    show("You find a small cabin.", [
-        { text: "Go inside", next: end1 },
-        { text: "Walk past it", next: end2 }
+    show("You push into the crowd. Everyone is panicked and moving fast.", [
+        { text: "Stay with them", next: endA },
+        { text: "Break away", next: endB }
     ])
 }
 
 function path2() {
-    show("You see footprints in the dirt.", [
-        { text: "Follow them", next: end3 },
-        { text: "Ignore them", next: end4 }
+    show("You sprint into the trees. The noise fades behind you.", [
+        { text: "Follow a trail of footprints", next: endC },
+        { text: "Hide behind a fallen log", next: endA }
     ])
 }
 
-function end1() {
-    show("The cabin is safe. You rest.", [])
+function endA() {
+    show("You find shelter and wait until the danger passes.", [])
 }
 
-function end2() {
-    show("You get lost but find a river.", [])
+function endB() {
+    show("You get separated and wander until rescuers find you.", [])
 }
 
-function end3() {
-    show("The footprints lead to a friend.", [])
+function endC() {
+    show("The footprints lead you to someone who helps you escape.", [])
 }
 
-function end4() {
-    show("You stay where you are until help arrives.", [])
+function endD() {
+    show("You stay hidden until morning and walk to safety.", [])
 }
 
 start()
