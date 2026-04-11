@@ -12,8 +12,12 @@ function show(text, options) {
     })
 }
 
+function restart() {
+    start()
+}
+
 function start() {
-    show("You wake up in a forest, smoke drifting through the trees. In the distance, you hear inhuman screeching. People are running and shouting.", [
+    show("You wake up in a forest, smoke drifting through the trees. Inhuman screeching echoes in the distance. People are running and shouting.", [
         { text: "Follow the crowd", next: path1 },
         { text: "Run deeper into the forest", next: path2 }
     ])
@@ -62,19 +66,27 @@ function path2B() {
 }
 
 function endGood1() {
-    show("You escape to a ridge overlooking the forest. A rescue team spots your signal flare and pulls you to safety.", [])
+    show("You escape to a ridge overlooking the forest. A rescue team spots your signal flare and pulls you to safety.", [
+        { text: "Restart", next: restart }
+    ])
 }
 
 function endGood2() {
-    show("The lantern belongs to a survivor group. They take you in and lead you to a fortified shelter.", [])
+    show("The lantern belongs to a survivor group. They take you in and lead you to a fortified shelter.", [
+        { text: "Restart", next: restart }
+    ])
 }
 
 function endBad1() {
-    show("A mutated creature lunges from the shadows. You don't have time to react.", [])
+    show("A mutated creature lunges from the shadows. You don't have time to react.", [
+        { text: "Restart", next: restart }
+    ])
 }
 
 function endBad2() {
-    show("You stay still, hoping the danger passes. It doesn't. Something finds you in the dark.", [])
+    show("You stay still, hoping the danger passes. It doesn't. Something finds you in the dark.", [
+        { text: "Restart", next: restart }
+    ])
 }
 
 start()
