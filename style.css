@@ -1,0 +1,24 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    padding: 40px;
+}
+
+#story {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 18px;
+    border: none;
+    background: lightblue;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: deepskyblue;
+}
