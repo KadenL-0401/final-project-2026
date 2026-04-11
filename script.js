@@ -13,40 +13,68 @@ function show(text, options) {
 }
 
 function start() {
-    show("You wake up in a forest, vision blurry, smoke all around you. People are running and screaming.", [
+    show("You wake up in a forest, smoke drifting through the trees. In the distance, you hear inhuman screeching. People are running and shouting.", [
         { text: "Follow the crowd", next: path1 },
-        { text: "Run into the forest", next: path2 }
+        { text: "Run deeper into the forest", next: path2 }
     ])
 }
 
 function path1() {
-    show("You push into the crowd. Everyone is panicked and moving fast.", [
-        { text: "Stay with them", next: endA },
-        { text: "Break away", next: endB }
+    show("You push into the panicked crowd. Something roars behind you, shaking the ground.", [
+        { text: "Stay with the group", next: path1A },
+        { text: "Break away and hide", next: path1B }
+    ])
+}
+
+function path1A() {
+    show("The group reaches an abandoned bus. The windows are shattered. Something is moving inside.", [
+        { text: "Enter the bus", next: endBad1 },
+        { text: "Keep running past it", next: endGood1 }
+    ])
+}
+
+function path1B() {
+    show("You slip away and crouch behind a fallen tree. The forest is quiet except for distant growling.", [
+        { text: "Climb the tree to scout", next: endGood2 },
+        { text: "Stay hidden and wait", next: endBad2 }
     ])
 }
 
 function path2() {
-    show("You sprint into the trees. The noise fades behind you.", [
-        { text: "Follow a trail of footprints", next: endC },
-        { text: "Hide behind a fallen log", next: endA }
+    show("You sprint into the darker part of the forest. The screams fade behind you. A strange clicking sound echoes nearby.", [
+        { text: "Follow a trail of footprints", next: path2A },
+        { text: "Avoid the trail and move quietly", next: path2B }
     ])
 }
 
-function endA() {
-    show("You find shelter and wait until the danger passes.", [])
+function path2A() {
+    show("The footprints lead to a torn backpack. A low growl vibrates through the air.", [
+        { text: "Call out", next: endBad1 },
+        { text: "Back away slowly", next: endGood1 }
+    ])
 }
 
-function endB() {
-    show("You get separated and wander until rescuers find you.", [])
+function path2B() {
+    show("You move silently through the brush. A faint lantern light flickers ahead.", [
+        { text: "Approach the light", next: endGood2 },
+        { text: "Avoid it and keep moving", next: endBad2 }
+    ])
 }
 
-function endC() {
-    show("The footprints lead you to someone who helps you escape.", [])
+function endGood1() {
+    show("You escape to a ridge overlooking the forest. A rescue team spots your signal flare and pulls you to safety.", [])
 }
 
-function endD() {
-    show("You stay hidden until morning and walk to safety.", [])
+function endGood2() {
+    show("The lantern belongs to a survivor group. They take you in and lead you to a fortified shelter.", [])
+}
+
+function endBad1() {
+    show("A mutated creature lunges from the shadows. You don't have time to react.", [])
+}
+
+function endBad2() {
+    show("You stay still, hoping the danger passes. It doesn't. Something finds you in the dark.", [])
 }
 
 start()
