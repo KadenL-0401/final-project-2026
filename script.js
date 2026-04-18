@@ -1,19 +1,20 @@
-let story = document.getElementById("story")
-let choices = document.getElementById("choices")
+let story = document.getElementById("story");
+let choices = document.getElementById("choices");
 
-function show(text, options, img) {
-    story.innerHTML = text + "<br><br><img src='" + img + "' width='300'>"
-    choices.innerHTML = ""
+function show(text, options) {
+    story.innerHTML = `<p>${text}</p>`;
+    choices.innerHTML = "";
+
     options.forEach(o => {
-        let b = document.createElement("button")
-        b.textContent = o.text
-        b.onclick = o.next
-        choices.appendChild(b)
-    })
+        let b = document.createElement("button");
+        b.textContent = o.text;
+        b.onclick = o.next;
+        choices.appendChild(b);
+    });
 }
 
 function restart() {
-    start()
+    start();
 }
 
 function start() {
@@ -22,8 +23,8 @@ function start() {
         [
             { text: "Follow the crowd", next: path1 },
             { text: "Run deeper into the forest", next: path2 }
-        ],
-    )
+        ]
+    );
 }
 
 function path1() {
@@ -32,8 +33,8 @@ function path1() {
         [
             { text: "Stay with the group", next: path1A },
             { text: "Break away and hide", next: path1B }
-        ],
-    )
+        ]
+    );
 }
 
 function path1A() {
@@ -42,8 +43,8 @@ function path1A() {
         [
             { text: "Enter the bus", next: endBad1 },
             { text: "Keep running past it", next: endGood1 }
-        ],
-    )
+        ]
+    );
 }
 
 function path1B() {
@@ -52,8 +53,8 @@ function path1B() {
         [
             { text: "Climb the tree to scout", next: endGood2 },
             { text: "Stay hidden and wait", next: endBad2 }
-        ],
-    )
+        ]
+    );
 }
 
 function path2() {
@@ -62,8 +63,8 @@ function path2() {
         [
             { text: "Follow a trail of footprints", next: path2A },
             { text: "Avoid the trail and move quietly", next: path2B }
-        ],
-    )
+        ]
+    );
 }
 
 function path2A() {
@@ -72,8 +73,8 @@ function path2A() {
         [
             { text: "Call out", next: endBad1 },
             { text: "Back away slowly", next: endGood1 }
-        ],
-    )
+        ]
+    );
 }
 
 function path2B() {
@@ -82,8 +83,8 @@ function path2B() {
         [
             { text: "Approach the light", next: endGood2 },
             { text: "Avoid it and keep moving", next: endBad2 }
-        ],
-    )
+        ]
+    );
 }
 
 function endGood1() {
@@ -91,8 +92,8 @@ function endGood1() {
         "You escape to a ridge overlooking the forest. A rescue team spots your signal flare and pulls you to safety.",
         [
             { text: "Restart", next: restart }
-        ],
-    )
+        ]
+    );
 }
 
 function endGood2() {
@@ -100,8 +101,8 @@ function endGood2() {
         "The lantern belongs to a survivor group. They take you in and lead you to a fortified shelter.",
         [
             { text: "Restart", next: restart }
-        ],
-    )
+        ]
+    );
 }
 
 function endBad1() {
@@ -109,8 +110,8 @@ function endBad1() {
         "A mutated creature lunges from the shadows. You don't have time to react.",
         [
             { text: "Restart", next: restart }
-        ],
-    )
+        ]
+    );
 }
 
 function endBad2() {
@@ -118,8 +119,8 @@ function endBad2() {
         "You stay still, hoping the danger passes. It doesn't. Something finds you in the dark.",
         [
             { text: "Restart", next: restart }
-        ],
-    )
+        ]
+    );
 }
 
-start()
+start();
