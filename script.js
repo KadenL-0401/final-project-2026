@@ -1,11 +1,23 @@
-let story = document.getElementById("story");
-let choices = document.getElementById("choices");
-let visual = document.getElementById("visual");
-let music = document.getElementById("bg-music");
+let story;
+let choices;
+let visual;
+let music;
 
 let soundOn = false;
 
+// Wait until page fully loads (fixes your issue)
+window.onload = function() {
+    story = document.getElementById("story");
+    choices = document.getElementById("choices");
+    visual = document.getElementById("visual");
+    music = document.getElementById("bg-music");
+
+    start();
+};
+
 function toggleMusic() {
+    if (!music) return;
+
     if (soundOn) {
         music.pause();
     } else {
@@ -14,7 +26,11 @@ function toggleMusic() {
     soundOn = !soundOn;
 }
 
-function show(text, options, art) {
+function show(text, options, art, endingNumber = null) {
+    if (endingNumber !== null) {
+        text += `\n\n--- Ending ${endingNumber} ---`;
+    }
+
     story.innerHTML = `<p>${text}</p>`;
     choices.innerHTML = "";
     visual.textContent = art;
@@ -33,15 +49,15 @@ function restart() {
 
 function start() {
     show(
-`You wake up on cold, damp ground in a dense forest. The air smells like smoke.
+`You wake up on cold, damp ground in a dense forest.
 
-People are running past you. Something is behind them.
+People are running past you.
 
-It’s getting closer.`,
-[
-    { text: "Follow the crowd", next: path1 },
-    { text: "Head deeper into the forest", next: path2 }
-],
+Something is behind them.`,
+    [
+        { text: "Follow the crowd", next: path1 },
+        { text: "Head deeper into the forest", next: path2 }
+    ],
 `🌲🌲🌲
 ( -_- )
 🌲🔥🌲`
@@ -50,32 +66,30 @@ It’s getting closer.`,
 
 function path1() {
     show(
-`You move with the crowd. No one is explaining anything.
+`You move with the crowd.
 
-Something heavy crashes through the trees behind you.
+Something heavy crashes through the trees.
 
-The group starts to split.`,
-[
-    { text: "Stay with the group", next: path1A },
-    { text: "Hide", next: path1B }
-],
+The group splits.`,
+    [
+        { text: "Stay with the group", next: path1A },
+        { text: "Hide", next: path1B }
+    ],
 `🏃🏃🏃
-(>_<)
-🌲🌲`
+(>_<)`
     );
 }
 
 function path1A() {
     show(
-`You reach an abandoned bus. It’s damaged.
+`You reach an abandoned bus.
 
-There’s a noise inside.`,
-[
-    { text: "Enter the bus", next: endBad1 },
-    { text: "Keep moving", next: endGood1 }
-],
+There is a noise inside.`,
+    [
+        { text: "Enter the bus", next: endBad1 },
+        { text: "Keep moving", next: endGood1 }
+    ],
 `🚌
-[     ]
 ( ._. )`
     );
 }
@@ -84,14 +98,13 @@ function path1B() {
     show(
 `You hide behind a fallen tree.
 
-Something is moving nearby.`,
-[
-    { text: "Climb the tree", next: endGood2 },
-    { text: "Stay still", next: endBad2 }
-],
+Something is nearby.`,
+    [
+        { text: "Climb the tree", next: endGood2 },
+        { text: "Stay still", next: endBad2 }
+    ],
 `🌲
-( -_- )
-====`
+( -_- )`
     );
 }
 
@@ -99,13 +112,12 @@ function path2() {
     show(
 `You move deeper into the forest.
 
-You hear a clicking sound ahead.`,
-[
-    { text: "Follow footprints", next: path2A },
-    { text: "Avoid the area", next: path2B }
-],
-`🌲🌲🌲
-... ... ...
+You hear clicking ahead.`,
+    [
+        { text: "Follow footprints", next: path2A },
+        { text: "Avoid the area", next: path2B }
+    ],
+`🌲🌲
 ( ? )`
     );
 }
@@ -115,13 +127,12 @@ function path2A() {
 `You find a torn backpack.
 
 Something moves nearby.`,
-[
-    { text: "Call out", next: endBad1 },
-    { text: "Back away", next: endGood1 }
-],
+    [
+        { text: "Call out", next: endBad1 },
+        { text: "Back away", next: endGood1 }
+    ],
 `🎒
-( o_o )
-...`
+( o_o )`
     );
 }
 
@@ -129,14 +140,13 @@ function path2B() {
     show(
 `You move carefully.
 
-A small light appears ahead.`,
-[
-    { text: "Approach", next: endGood2 },
-    { text: "Avoid it", next: endBad2 }
-],
+A faint light appears.`,
+    [
+        { text: "Approach", next: endGood2 },
+        { text: "Avoid it", next: endBad2 }
+    ],
 `✨
-( -_- )
-🌲`
+( -_- )`
     );
 }
 
@@ -147,24 +157,22 @@ function endGood1() {
 A rescue team sees you.
 
 You make it out.`,
-[
-    { text: "Restart", next: restart }
-],
+    [{ text: "Restart", next: restart }],
 `🚁
-\\( ^_^ )/`
+\\( ^_^ )/`,
+    1
     );
 }
 
 function endGood2() {
     show(
-`You find a group of survivors.
+`You find survivors.
 
 They let you stay.`,
-[
-    { text: "Restart", next: restart }
-],
+    [{ text: "Restart", next: restart }],
 `( ^_^ )
-🏕️🔥`
+🏕️`,
+    2
     );
 }
 
@@ -173,11 +181,9 @@ function endBad1() {
 `You hear something behind you.
 
 Too late.`,
-[
-    { text: "Restart", next: restart }
-],
-`( 0_0 )
-💀`
+    [{ text: "Restart", next: restart }],
+`💀`,
+    3
     );
 }
 
@@ -185,13 +191,9 @@ function endBad2() {
     show(
 `You stay still.
 
-It finds you anyway.`,
-[
-    { text: "Restart", next: restart }
-],
-`( -_- )
-...👁`
+It finds you.`,
+    [{ text: "Restart", next: restart }],
+`👁`,
+    4
     );
 }
-
-start();
