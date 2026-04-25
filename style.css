@@ -1,24 +1,51 @@
 body {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
+    background: #0b0b0b;
+    color: #f1f1f1;
     text-align: center;
     padding: 40px;
 }
 
+#game-container {
+    max-width: 700px;
+    margin: auto;
+    background: rgba(20,20,20,0.95);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.9);
+}
+
 #story {
-    font-size: 22px;
+    font-size: 20px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+#image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#top-bar {
     margin-bottom: 20px;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 12px 22px;
     margin: 10px;
-    font-size: 18px;
+    font-size: 16px;
     border: none;
-    background: lightblue;
+    background: #222;
+    color: white;
     border-radius: 6px;
     cursor: pointer;
+    transition: 0.25s;
 }
 
 button:hover {
-    background: deepskyblue;
+    background: #444;
+    transform: scale(1.05);
 }

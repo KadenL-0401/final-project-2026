@@ -2,12 +2,26 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Story Buttons</title>
+    <title>Forest Survival</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div id="game-container">
+    <div id="top-bar">
+        <button onclick="restart()">Restart</button>
+        <button onclick="toggleMusic()">Toggle Sound</button>
+    </div>
+
+    <img id="image" src="" alt="scene">
     <div id="story"></div>
     <div id="choices"></div>
-    <script src="script.js"></script>
+</div>
+
+<audio id="bg-music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/10/16/audio_12b0f1c8b7.mp3" type="audio/mp3">
+</audio>
+
+<script src="script.js"></script>
 </body>
 </html>
